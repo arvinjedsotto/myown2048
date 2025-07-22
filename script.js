@@ -84,15 +84,24 @@ function move(dir) {
     grid[i] = movedRow;
   }
 
-  if (moved) {
-    score += addScore;
-    updateScore();
-    placeRandom();
-    drawBoard();
-    if (isGameOver()) {
-      message.textContent = alert("Kamulalan mo! HAHAHAHAHA!");
-    }
+if (moved) {
+  score += addScore;
+  updateScore();
+  placeRandom();
+  drawBoard();
+
+  if (has2048Tile()) {
+    message.textContent = "🎉 Galing mo! Magresign naka!";
+    disableInput();
+  } else if (isGameOver()) {
+    message.textContent = "Kamulalan mo! HAHAHAHAHA!";
+    disableInput();
   }
+}
+}
+
+function has2048Tile() {
+  return grid.flat().includes(2048);
 }
 
 function isGameOver() {
@@ -113,9 +122,14 @@ document.addEventListener("keydown", e => {
     case "ArrowRight": move("right"); break;
     case "ArrowUp": move("up"); break;
     case "ArrowDown": move("down"); break;
+    case "a": move("left"); break;
+    case "d": move("right"); break;
+    case "w": move("up"); break;
+    case "s": move("down"); break;
   }
 });
 
 restartBtn.addEventListener("click", init);
 
 init();
+
