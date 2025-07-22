@@ -90,7 +90,7 @@ function move(dir) {
     placeRandom();
     drawBoard();
     if (isGameOver()) {
-      message.textContent = "Game Over!";
+      message.textContent = alert("Kamulalan mo! HAHAHAHAHA!");
     }
   }
 }
